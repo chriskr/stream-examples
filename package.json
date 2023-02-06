@@ -1,0 +1,32 @@
+{
+  "name": "stream-refresher",
+  "version": "0.0.1",
+  "description": "Small stream examples",
+  "main": "script.ts",
+  "author": "Christian Krebs <christian.krebs.pi@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^24.0.0",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-typescript": "^10.0.1",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "@types/react-syntax-highlighter": "^15.5.6",
+    "rollup": "^3.9.1",
+    "typescript": "^4.8.3"
+  },
+  "type": "module",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-syntax-highlighter": "^15.5.0",
+    "rxbeach": "^2.3.0",
+    "rxjs": "^7.8.0"
+  },
+  "scripts": {
+    "watch": "NODE_ENV=development rollup -cw",
+    "build": "NODE_ENV=production rollup -c",
+    "serve": "NODE_ENV=development python3 -m http.server"
+  }
+}
