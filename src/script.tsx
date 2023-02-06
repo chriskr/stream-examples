@@ -108,6 +108,9 @@ const TestPage = ({ codeSnippet }: { codeSnippet: string }) => {
       <pre></pre>
       <h2>test$</h2>
       <ConnectedLog />
+      <p>
+        <a href="https://github.com/chriskr/stream-examples">github repo</a>
+      </p>
     </div>
   );
 };
