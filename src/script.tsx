@@ -86,6 +86,7 @@ const ConnectedLog = connect(Log, test$);
 const TestPage = ({ codeSnippet }: { codeSnippet: string }) => {
   return (
     <div>
+      <h1>Stream Code Exmaples</h1>
       <h2>
         <code>combineLatest</code> versus <code>withLatestFrom</code>
       </h2>
