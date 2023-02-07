@@ -62,7 +62,7 @@ const test$ = combineLatest({
 }).pipe(
   withLatestFrom(countTree$),
   map(([{ countOne, countTwo }, countTree]) => ({
-    log: JSON.stringify(
+    str: JSON.stringify(
       {
         countOne,
         countTwo,
