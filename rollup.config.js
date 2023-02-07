@@ -6,7 +6,7 @@ import json from "@rollup/plugin-json";
 export default {
   input: "src/script.tsx",
   output: {
-    dir: "./build",
+    dir: "./build/scripts",
     name: "script.js",
     format: "es",
   },

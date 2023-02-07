@@ -11,23 +11,24 @@ import {
 import { combineLatest } from "rxjs";
 import { map, withLatestFrom } from "rxjs/operators";
 import { connect } from "rxbeach/react";
-import Log from "./Log";
+import Print from "./Print";
 
-const getCodeSnippet = async () => {
+const getCodeSnippet = async (url) => {
   try {
-    const res = await fetch("../src/script.tsx");
+    const res = await fetch(url);
     const code = await res.text();
     console.log(code);
-    const snippet = code.match(
-      new RegExp(/(?<=\/\/ example\s*\n).*?(?=\/\/ end example)/, "s")
+    const result = code.match(
+      new RegExp(/(?:\/\/ example)(.*?)\n(.*?)(?:\/\/ end example)/, "s")
     );
-    return snippet?.[0] ?? "--";
+    const [, id, snippet] = result ?? [, , "---"];
+    return { id, snippet };
   } catch (e) {
-    return "--";
+    return { id: undefined, snippet: "---" };
   }
 };
 
-// example
+// example combineLatest-versus-withLatestFrom
 type CountPayload = { count: number };
 
 const countOne = actionCreator<CountPayload>("[TEST] COUNT_1");
@@ -81,7 +82,7 @@ const getCountClickHandler = (
   return () => dispatchAction(actionCreator({ count: counter++ }));
 };
 
-const ConnectedLog = connect(Log, test$);
+const ConnectedPrint = connect(Print, test$);
 
 const TestPage = ({ codeSnippet }: { codeSnippet: string }) => {
   return (
@@ -90,7 +91,7 @@ const TestPage = ({ codeSnippet }: { codeSnippet: string }) => {
       <h2>
         <code>combineLatest</code> versus <code>withLatestFrom</code>
       </h2>
-      <Log log={codeSnippet} />
+      <Print str={codeSnippet} />
       <p>
         <button onClick={useCallback(getCountClickHandler(countOne), [])}>
           increase countOne
@@ -108,7 +109,7 @@ const TestPage = ({ codeSnippet }: { codeSnippet: string }) => {
       </p>
       <pre></pre>
       <h2>test$</h2>
-      <ConnectedLog />
+      <ConnectedPrint />
       <p>
         <a href="https://github.com/chriskr/stream-examples">github repo</a>
       </p>
@@ -117,7 +118,7 @@ const TestPage = ({ codeSnippet }: { codeSnippet: string }) => {
 };
 
 window.onload = async () => {
-  const snippet = await getCodeSnippet();
+  const { snippet } = await getCodeSnippet("../src/script.tsx");
   const reactRoot = document.querySelector("#react-root");
   if (!reactRoot) return;
   createRoot(reactRoot).render(<TestPage codeSnippet={snippet} />);

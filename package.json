@@ -2,7 +2,7 @@
   "name": "stream-refresher",
   "version": "0.0.1",
   "description": "Small stream examples",
-  "main": "script.ts",
+  "main": "src/script.tsx",
   "author": "Christian Krebs <christian.krebs.pi@gmail.com>",
   "license": "MIT",
   "devDependencies": {
