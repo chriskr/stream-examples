@@ -13,7 +13,7 @@ import { map, withLatestFrom } from "rxjs/operators";
 import { connect } from "rxbeach/react";
 import Print from "./Print";
 
-const getCodeSnippet = async (url) => {
+const getCodeSnippet = async (url: string) => {
   try {
     const res = await fetch(url);
     const code = await res.text();
