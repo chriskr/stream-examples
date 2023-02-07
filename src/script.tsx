@@ -17,7 +17,6 @@ const getCodeSnippet = async (url) => {
   try {
     const res = await fetch(url);
     const code = await res.text();
-    console.log(code);
     const result = code.match(
       new RegExp(/(?:\/\/ example)(.*?)\n(.*?)(?:\/\/ end example)/, "s")
     );
