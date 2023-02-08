@@ -2,18 +2,16 @@ import React, { useCallback } from "react";
 import {
   dispatchAction,
   actionCreator,
-  ActionCreatorWithPayload,
   reducedStream,
   reducer,
   action$,
 } from "rxbeach";
-import { combineLatest } from "rxjs";
-import { map, scan, startWith, withLatestFrom } from "rxjs/operators";
+import { map, scan, startWith } from "rxjs/operators";
 import { connect } from "rxbeach/react";
 import CodeSnippet from "../CodeSnippet";
 import Print from "../Print";
 import { ofType } from "rxbeach/operators";
-// example
+
 const getTimeStamp = () => {
   const date = new Date();
   return `${String(date.getHours()).padStart(2, "0")}:${String(
@@ -21,9 +19,10 @@ const getTimeStamp = () => {
   ).padStart(2, "0")}:${String(date.getSeconds()).padStart(2, "0")}`;
 };
 
+// example
 const toggleShowHide = actionCreator("[TEST] TOGGLE_SHOW_HIDE");
 
-const isVisible$ = reducedStream("countThree$", { isVisible: true }, [
+const isVisible$ = reducedStream("isVisible$", { isVisible: true }, [
   reducer(toggleShowHide, ({ isVisible }) => ({ isVisible: !isVisible })),
 ]);
 
