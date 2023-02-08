@@ -14,20 +14,33 @@ import CodeSnippet from "../CodeSnippet";
 import Print from "../Print";
 import { ofType } from "rxbeach/operators";
 
+const getTimeStamp = () => {
+  const date = new Date();
+  return `${String(date.getHours()).padStart(2, "0")}:${String(
+    date.getMinutes()
+  ).padStart(2, "0")}:${String(date.getSeconds()).padStart(2, "0")}`;
+};
+
 // example
 const notify = actionCreator("[TEST] NOTIFY");
 const startAction = actionCreator("[ardoq] START_ACTION");
 
 const withoutStartAction$ = action$.pipe(
   ofType(notify),
-  scan(({ count }, _) => ({ count: count + 1 }), { count: 0 }),
+  scan(({ count }) => ({ count: count + 1, last: getTimeStamp() }), {
+    count: 0,
+    last: getTimeStamp(),
+  }),
   map((state) => ({ str: JSON.stringify(state) }))
 );
 
 const withStartAction$ = action$.pipe(
   ofType(notify),
   startWith(startAction()),
-  scan(({ count }, _) => ({ count: count + 1 }), { count: 0 }),
+  scan(({ count }) => ({ count: count + 1, last: getTimeStamp() }), {
+    count: 0,
+    last: getTimeStamp(),
+  }),
   map((state) => ({ str: JSON.stringify(state) }))
 );
 // end example
