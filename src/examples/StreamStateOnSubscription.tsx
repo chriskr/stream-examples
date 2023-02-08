@@ -21,6 +21,12 @@ const getTimeStamp = () => {
   ).padStart(2, "0")}:${String(date.getSeconds()).padStart(2, "0")}`;
 };
 
+const toggleShowHide = actionCreator("[TEST] TOGGLE_SHOW_HIDE");
+
+const isVisible$ = reducedStream("countThree$", { isVisible: true }, [
+  reducer(toggleShowHide, ({ isVisible }) => ({ isVisible: !isVisible })),
+]);
+
 // example
 const notify = actionCreator("[TEST] NOTIFY");
 const startAction = actionCreator("[ardoq] START_ACTION");
@@ -48,7 +54,7 @@ const withStartAction$ = action$.pipe(
 const ConnectedWithout = connect(Print, withoutStartAction$);
 const ConnectedWith = connect(Print, withStartAction$);
 
-const ExampleCombineLatestVersusWithLatestFrom = () => {
+const Page = ({ isVisible }: { isVisible: boolean }) => {
   return (
     <section>
       <h2>stream state on subscription</h2>
@@ -58,12 +64,29 @@ const ExampleCombineLatestVersusWithLatestFrom = () => {
           notify
         </button>
       </p>
-      <h2>withoutStartAction$</h2>
-      <ConnectedWithout />
-      <h2>withStartAction$</h2>
-      <ConnectedWith />
+      <p>
+        <button
+          onClick={useCallback(() => dispatchAction(toggleShowHide()), [])}
+        >
+          {isVisible ? "Hide views" : "Show views"}
+        </button>
+      </p>
+      {isVisible && (
+        <>
+          <h2>withoutStartAction$</h2>
+          <ConnectedWithout />
+          <h2>withStartAction$</h2>
+          <ConnectedWith />
+        </>
+      )}
     </section>
   );
+};
+
+const ConnectedPage = connect(Page, isVisible$);
+
+const ExampleCombineLatestVersusWithLatestFrom = () => {
+  return <ConnectedPage />;
 };
 
 export default ExampleCombineLatestVersusWithLatestFrom;
