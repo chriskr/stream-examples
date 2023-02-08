@@ -13,7 +13,7 @@ import { connect } from "rxbeach/react";
 import CodeSnippet from "../CodeSnippet";
 import Print from "../Print";
 import { ofType } from "rxbeach/operators";
-
+// example
 const getTimeStamp = () => {
   const date = new Date();
   return `${String(date.getHours()).padStart(2, "0")}:${String(
@@ -27,7 +27,6 @@ const isVisible$ = reducedStream("countThree$", { isVisible: true }, [
   reducer(toggleShowHide, ({ isVisible }) => ({ isVisible: !isVisible })),
 ]);
 
-// example
 const notify = actionCreator("[TEST] NOTIFY");
 const startAction = actionCreator("[ardoq] START_ACTION");
 
@@ -49,7 +48,6 @@ const withStartAction$ = action$.pipe(
   }),
   map((state) => ({ str: JSON.stringify(state) }))
 );
-// end example
 
 const ConnectedWithout = connect(Print, withoutStartAction$);
 const ConnectedWith = connect(Print, withStartAction$);
@@ -90,3 +88,4 @@ const ExampleCombineLatestVersusWithLatestFrom = () => {
 };
 
 export default ExampleCombineLatestVersusWithLatestFrom;
+// end example
