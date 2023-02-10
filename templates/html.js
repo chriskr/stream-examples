@@ -13,6 +13,9 @@ const html = (title, rootPath) => `<!DOCTYPE html>
     code {
         font-family: "Roboto Mono", monospace;
     }
+    .select-theme-container {
+        text-align: right;
+    }
     .react-syntax-highlighter-line-number {
         font-style: normal !important;
         color: hsl(0, 0%, 70%) !important;

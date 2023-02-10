@@ -11,6 +11,7 @@ import { map, withLatestFrom } from 'rxjs/operators';
 import { connect } from 'rxbeach/react';
 import CodeSnippet from '../CodeSnippet';
 import Print from '../Print';
+import SelectTheme from '../SelectTheme';
 
 // example
 type CountPayload = { count: number };
@@ -75,6 +76,7 @@ const ExampleCombineLatestVersusWithLatestFrom = () => {
       <h2>
         <code>combineLatest</code> versus <code>withLatestFrom</code>
       </h2>
+      <SelectTheme />
       <CodeSnippet
         src={`${window.ROOT_PATH}/src/examples/CombineLatestVersusWithLatestFrom.tsx`}
       />
