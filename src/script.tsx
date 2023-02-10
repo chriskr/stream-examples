@@ -8,7 +8,6 @@ declare global {
     ROOT_PATH: string;
   }
 }
-window.ROOT_PATH = '';
 
 window.onload = async () => {
   const reactRoot = document.querySelector('#react-root');

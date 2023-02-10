@@ -33,6 +33,7 @@
     "watch": "NODE_ENV=development rollup -cw",
     "build": "NODE_ENV=production rollup -c",
     "serve": "NODE_ENV=development python3 -m http.server",
-    "build:examples": "scripts/build-examples.js"
+    "build:examples": "scripts/build-examples.js",
+    "build:github": "ROOT_PATH=stream-examples NODE_ENV=production rollup -c"
   }
 }

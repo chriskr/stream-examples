@@ -1,5 +1,5 @@
-const html = (title) => `<!DOCTYPE html>
-<title>${title}</title>
+const html = (title, rootPath) => `<!DOCTYPE html>
+<title>${(title, rootPath)}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
@@ -22,6 +22,7 @@ const html = (title) => `<!DOCTYPE html>
     
 </style>
 <div id="react-root"></div>
+<script>window.ROOT_PATH = "${rootPath}";</script>
 <script src="./script.js" type="module"></script>
 `;
 
