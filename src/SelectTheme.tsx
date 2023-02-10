@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'rxbeach/react';
-import { options, selctedStoredTheme$, setTheme, Themes } from './themes';
+import { options, selectedTheme$, setTheme, Themes } from './themes';
 
 const SelectTheme = ({ theme }: { theme: Themes }) => (
   <div className="select-theme-container">
     <select
-      onChange={(event) => setTheme(event.currentTarget.value as Themes)}
+      onChange={({ currentTarget: { value } }) => setTheme(value as Themes)}
       value={theme}
     >
       {options.map(({ name, value }) => (
@@ -17,6 +17,6 @@ const SelectTheme = ({ theme }: { theme: Themes }) => (
   </div>
 );
 
-const ConnectedSelectTheme = connect(SelectTheme, selctedStoredTheme$);
+const ConnectedSelectTheme = connect(SelectTheme, selectedTheme$);
 
 export default ConnectedSelectTheme;

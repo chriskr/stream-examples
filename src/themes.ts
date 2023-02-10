@@ -3,7 +3,7 @@ import atom from 'react-syntax-highlighter/dist/esm/styles/prism/atom-dark';
 import github from 'react-syntax-highlighter/dist/esm/styles/prism/ghcolors';
 import vsdark from 'react-syntax-highlighter/dist/esm/styles/prism/vsc-dark-plus';
 import { dispatchAction, actionCreator, reducedStream, reducer } from 'rxbeach';
-import { combineLatest, from, map, tap } from 'rxjs';
+import { withOnFistSubscription } from './withOnFistSubscription';
 
 export enum Themes {
   vs = 'vs',
@@ -27,23 +27,11 @@ export const options = [
 ];
 
 const selectTheme = actionCreator<{ theme: Themes }>('[THEMES] SELECT_THEME');
-const startAction = actionCreator('[ardoq] START_ACTION');
 
 export const setTheme = (theme: Themes) => {
   window.localStorage.setItem('theme', theme);
   dispatchAction(selectTheme({ theme }));
 };
-
-const getStored$ = from([startAction()]).pipe(
-  tap(() => {
-    const theme = (window.localStorage.getItem('theme') ?? Themes.vs) as Themes;
-    if (theme !== Themes.vs) setTimeout(setTheme, 16, theme);
-  })
-);
-
-const selectedTheme$ = reducedStream('selectedTheme$', { theme: Themes.vs }, [
-  reducer(selectTheme, (_, { theme }) => ({ theme })),
-]);
 
 window.addEventListener('storage', ({ key, newValue }) => {
   if (key === 'theme') {
@@ -51,7 +39,13 @@ window.addEventListener('storage', ({ key, newValue }) => {
   }
 });
 
-export const selctedStoredTheme$ = combineLatest({
-  selectedTheme: selectedTheme$,
-  getStored: getStored$,
-}).pipe(map(({ selectedTheme }) => selectedTheme));
+export const selectedTheme$ = withOnFistSubscription(
+  reducedStream('selectedTheme$', { theme: Themes.vs }, [
+    reducer(selectTheme, (_, { theme }) => ({ theme })),
+  ]),
+  () => {
+    const theme = (window.localStorage.getItem('theme') ?? Themes.vs) as Themes;
+    if (theme !== Themes.vs)
+      setTimeout(() => dispatchAction(selectTheme({ theme })), 16, theme);
+  }
+);
