@@ -33,12 +33,6 @@ export const setTheme = (theme: Themes) => {
   dispatchAction(selectTheme({ theme }));
 };
 
-window.addEventListener('storage', ({ key, newValue }) => {
-  if (key === 'theme') {
-    dispatchAction(selectTheme({ theme: newValue as Themes }));
-  }
-});
-
 export const selectedTheme$ = withOnFistSubscription(
   reducedStream('selectedTheme$', { theme: Themes.vs }, [
     reducer(selectTheme, (_, { theme }) => ({ theme })),
@@ -49,3 +43,9 @@ export const selectedTheme$ = withOnFistSubscription(
       setTimeout(() => dispatchAction(selectTheme({ theme })), 16, theme);
   }
 );
+
+window.addEventListener('storage', ({ key, newValue }) => {
+  if (key === 'theme') {
+    dispatchAction(selectTheme({ theme: newValue as Themes }));
+  }
+});

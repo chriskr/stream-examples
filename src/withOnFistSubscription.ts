@@ -6,7 +6,7 @@ export const withOnFistSubscription = <T>(
 ) => {
   return combineLatest({
     observable,
-    startStream: from([null]).pipe(tap(callback)),
+    start$: from([null]).pipe(tap(callback)),
   }).pipe(
     map(({ observable }) => observable),
     shareReplay({ refCount: true, bufferSize: 1 })
