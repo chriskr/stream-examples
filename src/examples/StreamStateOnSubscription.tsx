@@ -1,33 +1,33 @@
-import React, { useCallback } from "react";
+import React, { useCallback } from 'react';
 import {
   dispatchAction,
   actionCreator,
   reducedStream,
   reducer,
   action$,
-} from "rxbeach";
-import { map, scan, startWith } from "rxjs/operators";
-import { connect } from "rxbeach/react";
-import CodeSnippet from "../CodeSnippet";
-import Print from "../Print";
-import { ofType } from "rxbeach/operators";
+} from 'rxbeach';
+import { map, scan, startWith } from 'rxjs/operators';
+import { connect } from 'rxbeach/react';
+import CodeSnippet from '../CodeSnippet';
+import Print from '../Print';
+import { ofType } from 'rxbeach/operators';
 
 const getTimeStamp = () => {
   const date = new Date();
-  return `${String(date.getHours()).padStart(2, "0")}:${String(
+  return `${String(date.getHours()).padStart(2, '0')}:${String(
     date.getMinutes()
-  ).padStart(2, "0")}:${String(date.getSeconds()).padStart(2, "0")}`;
+  ).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
 };
 
-// example
-const toggleShowHide = actionCreator("[TEST] TOGGLE_SHOW_HIDE");
+const toggleShowHide = actionCreator('[TEST] TOGGLE_SHOW_HIDE');
 
-const isVisible$ = reducedStream("isVisible$", { isVisible: true }, [
+const isVisible$ = reducedStream('isVisible$', { isVisible: true }, [
   reducer(toggleShowHide, ({ isVisible }) => ({ isVisible: !isVisible })),
 ]);
 
-const notify = actionCreator("[TEST] NOTIFY");
-const startAction = actionCreator("[ardoq] START_ACTION");
+// example
+const notify = actionCreator('[TEST] NOTIFY');
+const startAction = actionCreator('[ardoq] START_ACTION');
 
 const withoutStartAction$ = action$.pipe(
   ofType(notify),
@@ -47,6 +47,7 @@ const withStartAction$ = action$.pipe(
   }),
   map((state) => ({ str: JSON.stringify(state) }))
 );
+// end example
 
 const ConnectedWithout = connect(Print, withoutStartAction$);
 const ConnectedWith = connect(Print, withStartAction$);
@@ -55,7 +56,9 @@ const Page = ({ isVisible }: { isVisible: boolean }) => {
   return (
     <section>
       <h2>stream state on subscription</h2>
-      <CodeSnippet src={"../src/examples/StreamStateOnSubscription.tsx"} />
+      <CodeSnippet
+        src={`${window.ROOT_PATH}/src/examples/StreamStateOnSubscription.tsx`}
+      />
       <p>
         <button onClick={useCallback(() => dispatchAction(notify()), [])}>
           notify
@@ -65,7 +68,7 @@ const Page = ({ isVisible }: { isVisible: boolean }) => {
         <button
           onClick={useCallback(() => dispatchAction(toggleShowHide()), [])}
         >
-          {isVisible ? "Hide views" : "Show views"}
+          {isVisible ? 'Hide views' : 'Show views'}
         </button>
       </p>
       {isVisible && (
@@ -82,9 +85,9 @@ const Page = ({ isVisible }: { isVisible: boolean }) => {
 
 const ConnectedPage = connect(Page, isVisible$);
 
-const ExampleCombineLatestVersusWithLatestFrom = () => {
+const StreamStateOnSubscription = () => {
   return <ConnectedPage />;
 };
 
-export default ExampleCombineLatestVersusWithLatestFrom;
+export default StreamStateOnSubscription;
 // end example

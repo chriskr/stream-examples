@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import StreamStateOnSubscription from '../examples/StreamStateOnSubscription';
+import CombineLatestVersusWithLatestFrom from '../examples/CombineLatestVersusWithLatestFrom';
 
 declare global {
   interface Window {
@@ -12,5 +12,5 @@ window.ROOT_PATH = '';
 window.onload = async () => {
   const reactRoot = document.querySelector('#react-root');
   if (!reactRoot) return;
-  createRoot(reactRoot).render(<StreamStateOnSubscription />);
+  createRoot(reactRoot).render(<CombineLatestVersusWithLatestFrom />);
 };
