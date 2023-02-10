@@ -3,14 +3,14 @@ import typescript from "@rollup/plugin-typescript";
 import commonjs from "@rollup/plugin-commonjs";
 import json from "@rollup/plugin-json";
 import replace from "@rollup/plugin-replace";
-import { minify } from "rollup-plugin-esbuild";
 
 export default {
-  input: "src/script.tsx",
+  input: "src/scripts/scriptExampleCombineLatestVersusWithLatestFrom.tsx",
   output: {
-    dir: "./build/scripts",
-    name: "script.js",
+    dir: "./build/examples",
+    name: "bundleExampleCombineLatestVersusWithLatestFrom.js",
     format: "es",
+    inlineDynamicImports: true,
   },
   plugins: [
     json(),
@@ -21,6 +21,5 @@ export default {
       "process.env.NODE_ENV": JSON.stringify(`"${process.env.NODE_ENV}"`),
       preventAssignment: true,
     }),
-    minify(),
   ],
 };

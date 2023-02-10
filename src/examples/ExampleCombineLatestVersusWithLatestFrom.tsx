@@ -40,6 +40,12 @@ const countTree$ = reducedStream("countThree$", { count: -1 }, [
   ),
 ]);
 
+const a = 8;
+
+/* here */
+
+// hello
+
 const test$ = combineLatest({
   countOne: countOne$,
   countTwo: countTwo$,
@@ -57,6 +63,7 @@ const test$ = combineLatest({
     ),
   }))
 );
+
 // end example
 
 const getCountClickHandler = (
@@ -75,7 +82,9 @@ const ExampleCombineLatestVersusWithLatestFrom = () => {
         <code>combineLatest</code> versus <code>withLatestFrom</code>
       </h2>
       <CodeSnippet
-        src={"../src/examples/ExampleCombineLatestVersusWithLatestFrom.tsx"}
+        src={
+          "../src/examples/ExampleCombineLatestVersusWithLatestFrom.tsx?h=89"
+        }
       />
       <p>
         <button onClick={useCallback(getCountClickHandler(countOne), [])}>
