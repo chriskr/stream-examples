@@ -48,9 +48,9 @@ const getLoadSrcStream = (src: string) =>
     startWith({ loading: 'loading..' })
   );
 
-const CodeSnippet = ({ src }: { src: string }) => {
+const CodeSnippet = React.memo(({ src }: { src: string }) => {
   const ConnectedPrint = connect(View, getLoadSrcStream(src));
   return <ConnectedPrint />;
-};
+});
 
 export default CodeSnippet;
