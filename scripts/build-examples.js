@@ -6,7 +6,7 @@ import config from '../templates/config.js';
 import html from '../templates/html.js';
 import script from '../templates/script.js';
 import index from '../templates/index.js';
-import yargs from 'yargs'; //'../node_modules/yargs/build/index.cjs';
+import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import {
   deleteDir,

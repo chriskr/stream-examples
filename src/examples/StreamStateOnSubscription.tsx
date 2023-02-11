@@ -11,6 +11,7 @@ import { connect } from 'rxbeach/react';
 import CodeSnippet from '../CodeSnippet';
 import Print from '../Print';
 import { ofType } from 'rxbeach/operators';
+import SelectTheme from '../SelectTheme';
 
 const getTimeStamp = () => {
   const date = new Date();
@@ -54,8 +55,9 @@ const ConnectedWith = connect(Print, withStartAction$);
 
 const Page = ({ isVisible }: { isVisible: boolean }) => {
   return (
-    <section>
+    <section className="code-example">
       <h2>stream state on subscription</h2>
+      <SelectTheme />
       <CodeSnippet
         src={`${window.ROOT_PATH}/src/examples/StreamStateOnSubscription.tsx`}
       />

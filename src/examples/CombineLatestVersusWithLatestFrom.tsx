@@ -72,7 +72,7 @@ const ConnectedPrint = connect(Print, test$);
 
 const ExampleCombineLatestVersusWithLatestFrom = () => {
   return (
-    <section>
+    <section className="code-example">
       <h2>
         <code>combineLatest</code> versus <code>withLatestFrom</code>
       </h2>
