@@ -96,7 +96,7 @@ const ExampleCombineLatestVersusWithLatestFrom = () => {
         </button>
       </p>
       <pre></pre>
-      <h2>test$</h2>
+      <h3>test$</h3>
       <ConnectedPrint />
     </section>
   );

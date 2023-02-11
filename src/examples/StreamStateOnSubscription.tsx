@@ -73,9 +73,9 @@ const Page = ({ isVisible }: { isVisible: boolean }) => {
       </p>
       {isVisible && (
         <>
-          <h2>withoutStartAction$</h2>
+          <h3>withoutStartAction$</h3>
           <ConnectedWithout />
-          <h2>withStartAction$</h2>
+          <h3>withStartAction$</h3>
           <ConnectedWith />
         </>
       )}

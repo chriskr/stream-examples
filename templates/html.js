@@ -7,7 +7,7 @@ const html = (title, rootPath) => `<!DOCTYPE html>
     html, body {
         font-family: system-ui;
     }
-    h1, h2 {
+    h1, h2, h3 {
         font-weight: normal;
     }
     pre {

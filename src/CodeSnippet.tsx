@@ -4,6 +4,7 @@ import { from, map, startWith } from 'rxjs';
 import { switchAll } from 'rxjs';
 import Print from './Print';
 
+// example
 const getCodeSnippet = async (src: string) => {
   try {
     const response = await fetch(src);
@@ -52,5 +53,6 @@ const CodeSnippet = React.memo(({ src }: { src: string }) => {
   const ConnectedPrint = connect(View, getLoadSrcStream(src));
   return <ConnectedPrint />;
 });
+// end example
 
 export default CodeSnippet;
