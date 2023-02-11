@@ -5,11 +5,13 @@ import vsdark from 'react-syntax-highlighter/dist/esm/styles/prism/vsc-dark-plus
 import { dispatchAction, actionCreator, reducedStream, reducer } from 'rxbeach';
 import { withOnFistSubscription } from './withOnFistSubscription';
 
+console.log(atom);
 vs[`pre[class*="language-"]`].background = 'hsl(0, 0%, 100%)';
 github[`pre[class*="language-"]`].background = 'hsl(0, 0%, 100%)';
 github.function = { color: '#8250df' };
 github.keyword = { color: '#cf222e' };
 github.number = { color: '#0550ae' };
+atom['class-name'] = { color: '#FFFFB6' };
 
 export enum Themes {
   atom = 'atom',
