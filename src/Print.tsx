@@ -15,9 +15,6 @@ const Print = ({ str, theme }: { str: string; theme: Themes }) => (
     customStyle={{
       fontFamily: "'Roboto Mono', monospace",
       fontSize: '0.8em',
-      ...(theme === Themes.vs || theme === Themes.github
-        ? { backgroundColor: 'hsl(0, 0%, 97%)' }
-        : {}),
     }}
     codeTagProps={{ style: { fontFamily: 'inherit' } }}
   >
