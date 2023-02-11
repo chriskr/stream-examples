@@ -10,6 +10,9 @@ const html = (title, rootPath) => `<!DOCTYPE html>
     h1, h2 {
         font-weight: normal;
     }
+    pre {
+        border-radius: 5px;
+    }
     code {
         font-family: "Roboto Mono", monospace;
     }

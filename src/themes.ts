@@ -6,24 +6,24 @@ import { dispatchAction, actionCreator, reducedStream, reducer } from 'rxbeach';
 import { withOnFistSubscription } from './withOnFistSubscription';
 
 export enum Themes {
-  vs = 'vs',
   atom = 'atom',
   github = 'github',
+  vs = 'vs',
   vsdark = 'vsdark',
 }
 
 export const styles = {
-  [Themes.vs]: vs,
   [Themes.atom]: atom,
   [Themes.github]: github,
+  [Themes.vs]: vs,
   [Themes.vsdark]: vsdark,
 };
 
 export const options = [
-  { name: 'visual studio', value: Themes.vs },
   { name: 'atom', value: Themes.atom },
   { name: 'github', value: Themes.github },
   { name: 'visual studio dark', value: Themes.vsdark },
+  { name: 'visual studio', value: Themes.vs },
 ];
 
 const selectTheme = actionCreator<{ theme: Themes }>('[THEMES] SELECT_THEME');
