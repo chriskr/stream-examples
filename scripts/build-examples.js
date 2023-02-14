@@ -1,27 +1,28 @@
 #!/usr/bin/env node
 
-import child_process from 'node:child_process';
-import Path from 'path';
-import config from '../templates/config.js';
-import html from '../templates/html.js';
-import script from '../templates/script.js';
-import index from '../templates/index.js';
-import yargs from 'yargs';
-import { hideBin } from 'yargs/helpers';
+import child_process from "node:child_process";
+import Path from "path";
+import config from "../templates/config.js";
+import html from "../templates/html.js";
+import script from "../templates/script.js";
+import index from "../templates/index.js";
+import yargs from "yargs";
+import { hideBin } from "yargs/helpers";
 import {
   deleteDir,
   createDir,
   listDir,
   createFile,
   getRootPath,
-} from './utils.js';
+  copyFile,
+} from "./utils.js";
 
 const args = yargs(hideBin(process.argv))
-  .option('root-path', {
-    alias: 'r',
-    type: 'string',
-    description: 'The root path on the server',
-    default: '',
+  .option("root-path", {
+    alias: "r",
+    type: "string",
+    description: "The root path on the server",
+    default: "",
   })
   .parse();
 
@@ -46,19 +47,18 @@ folder structure
 `;
 
 const main = async () => {
-  const examplesTargetPath = './build/examples';
-  const scriptPath = './src/scripts';
+  const examplesTargetPath = "./build/examples";
+  const scriptPath = "./src/scripts";
   deleteDir(examplesTargetPath);
   deleteDir(scriptPath);
-  deleteDir('./configs');
+  deleteDir("./configs");
   createDir(examplesTargetPath);
   createDir(scriptPath);
-  createDir('./configs');
-  const examples = listDir('./src/examples');
+  createDir("./configs");
+  const examples = listDir("./src/examples");
   const moduleNames = [];
+  const rootPath = getRootPath(args["root-path"]);
 
-  const rootPath = getRootPath(args['root-path']);
-  console.log({ rootPath });
   for (const example of examples) {
     const filename = Path.parse(example).name;
     moduleNames.push(filename);
